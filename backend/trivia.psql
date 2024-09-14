@@ -26,7 +26,7 @@ SET default_with_oids = false;
 
 CREATE TABLE public.categories (
     id SERIAL PRIMARY KEY,
-    type TEXT
+    type VARCHAR(120) NOT NULL  -- Matching the 'type' field in Category model
 );
 
 ALTER TABLE public.categories OWNER TO manal;
@@ -52,10 +52,10 @@ ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 
 CREATE TABLE public.questions (
     id SERIAL PRIMARY KEY,
-    question TEXT,
-    answer TEXT,
-    difficulty INTEGER,
-    category INTEGER REFERENCES public.categories(id) ON UPDATE CASCADE ON DELETE SET NULL
+    question TEXT NOT NULL,  -- Matching the 'question' field in Question model
+    answer TEXT NOT NULL,    -- Matching the 'answer' field in Question model
+    difficulty INTEGER NOT NULL CHECK (difficulty >= 1 AND difficulty <= 5), -- Matching the difficulty range validation
+    category INTEGER NOT NULL REFERENCES public.categories(id) ON UPDATE CASCADE ON DELETE SET NULL -- Foreign key from Question model to Category model
 );
 
 ALTER TABLE public.questions OWNER TO manal;
