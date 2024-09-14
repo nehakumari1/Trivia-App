@@ -5,31 +5,43 @@ class Question extends Component {
   constructor(){
     super();
     this.state = {
-      visibleAnswer: false
-    }
+      isAnswerVisible: false, // Updated variable name
+    };
   }
 
-  flipVisibility() {
-    this.setState({visibleAnswer: !this.state.visibleAnswer});
+  // Toggle the visibility of the answer
+  toggleAnswerVisibility() {
+    this.setState((prevState) => ({
+      isAnswerVisible: !prevState.isAnswerVisible
+    }));
   }
 
   render() {
     const { question, answer, category, difficulty } = this.props;
+    const { isAnswerVisible } = this.state; // Deconstruct state variable
+
     return (
-      <div className="Question-holder">
-        <div className="Question">{question}</div>
-        <div className="Question-status">
-          <img className="category" src={`${category}.svg`}/>
-          <div className="difficulty">Difficulty: {difficulty}</div>
-          <img src="delete.png" className="delete" onClick={() => this.props.questionAction('DELETE')}/>
-          
+      <div className="question-container">
+        <div className="question-text">{question}</div>
+        <div className="question-details">
+          <img className="category-icon" src={`${category}.svg`} alt="Category" />
+          <div className="difficulty-level">Difficulty: {difficulty}</div>
+          <img 
+            src="delete.png" 
+            className="delete-icon" 
+            alt="Delete" 
+            onClick={() => this.props.handleQuestionAction('DELETE')}
+          />
         </div>
-        <div className="show-answer button"
-            onClick={() => this.flipVisibility()}>
-            {this.state.visibleAnswer ? 'Hide' : 'Show'} Answer
-          </div>
-        <div className="answer-holder">
-          <span style={{"visibility": this.state.visibleAnswer ? 'visible' : 'hidden'}}>Answer: {answer}</span>
+        <div 
+          className="toggle-answer button" 
+          onClick={() => this.toggleAnswerVisibility()}>
+          {isAnswerVisible ? 'Hide' : 'Show'} Answer
+        </div>
+        <div className="answer-container">
+          <span style={{ visibility: isAnswerVisible ? 'visible' : 'hidden' }}>
+            Answer: {answer}
+          </span>
         </div>
       </div>
     );
