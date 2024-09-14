@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; 
 import logo from '../logo.svg';
 import '../stylesheets/Header.css';
 
 class Header extends Component {
 
-  navTo(uri){
-    window.location.href = window.location.origin + uri;
+  // Navigate to the specified path
+  redirectTo(path) {
+    const baseUrl = window.location.origin;
+    window.location.href = baseUrl + path;
   }
 
   render() {
     return (
-      <div className="App-header">
-        <h1 onClick={() => {this.navTo('')}}>Udacitrivia</h1>
-        <h2 onClick={() => {this.navTo('')}}>List</h2>
-        <h2 onClick={() => {this.navTo('/add')}}>Add</h2>
-        <h2 onClick={() => {this.navTo('/play')}}>Play</h2>
-      </div>
+      <header className="App-header">
+        <h1 onClick={() => this.redirectTo('/')}>Trivia Master</h1>
+        <h2 onClick={() => this.redirectTo('/')}>Questions List</h2>
+        <h2 onClick={() => this.redirectTo('/add')}>Add Question</h2>
+        <h2 onClick={() => this.redirectTo('/play')}>Start Game</h2>
+      </header>
     );
   }
 }
