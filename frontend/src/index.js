@@ -4,12 +4,10 @@ import './stylesheets/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// Render the main App component into the root DOM element
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+// For offline functionality and faster load times, switch
+// `unregister()` to `register()`. Be aware that it may introduce
+// certain challenges. Learn more about service workers here: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-
- //"start": "HOST='127.0.0.1' PORT='5000' react-scripts start",
